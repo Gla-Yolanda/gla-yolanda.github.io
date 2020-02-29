@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Test | Gridea</title>
+<title>树形DP | Gridea</title>
 <meta name="description" content="「献给许许多多的的祭日.」">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,14 +87,58 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Test</h1>
+            <h1>树形DP</h1>
             <p class="article-meta">
-              2020-02-26
+              2020-02-29
               
             </p>
             
             <div class="post-content">
-              <p>我爱你！╰(￣ω￣ｏ)</p>
+              <p>觉得这篇写得比较能看，所以发出来顺带测试一下效果</p>
+<p>顾名思义：在“树”的数据结构上做动态规划<br>
+书上的父子关系天然就是递归结构，相应有两个方向<br>
+常用：叶子-&gt;根：子节点传递有用的信息给根，之后由根求出最优解<br>
+动态规划顺序：后序遍历<br>
+实现方式：记忆化搜索<br>
+代码复杂度：O(n)</p>
+<p>例一：树的重心<br>
+解法<br>
+任选一个根，把无根树变成有根树<br>
+设f[i]表示以i为根的子树的结点个数<br>
+显然有：<img src="https://gla-yolanda.github.io/post-images/1582979660844.gif" alt="" loading="lazy"><br>
+一遍dfs的过程中直接计算即可<br>
+对于每个结点i，删除这个点后最大连通块的结点数为：max{n-f[i],max f[j]}</p>
+<p>例二：树的最长路径<br>
+解法<br>
+只需求出每个结点为根的子树中的最长链，取其中的最大值即可<br>
+设发f[i]标赛以i为根的子树中，i到叶子结点的距离的最大值，g[i]表示以i为根的子树中i到叶子结点的距离的次大值</p>
+<p>令j是i的儿子，则：<br>
+1.若f[i]+dis[i][j]&gt;f[i],则g[i]=f[i];f[i]=f[j]+dis[i][j];<br>
+2.否则，若f[i]+dis[i][j]&gt;g[i],则g[i]=f[j]+dis[i][j];<br>
+答案为max(f[i]+g[i]);</p>
+<p>例三：树的中心<br>
+一句话题意：找出树中最长距离最短点<br>
+解法<br>
+从任何一点i出发的最长距离，可能出现如下的情况<br>
+1.往下走，设终点在以i为根的子树中的最长距离为f[i]<br>
+2.往上走，设终点不在以i为根的子树中的最长距离为u[i]<br>
+答案是max(f[i],u[i])</p>
+<p>提供计算u[i]的做法<br>
+类似上一个问题，设终点在以i为根的子树中的次长距离为g[i]，同时用c[i],d[i]，分别记录f[i],g[i]是从哪个儿子转移过来的<br>
+令j是i的儿子，则：<br>
+1.若f[j]+dis[i][j]&gt;f[i]，则g[i]=f[i];f[i]=f[j]+dis[i][j];d[i]=c[i];c[i]=[j];<br>
+2.否则，若f[j]+dis[i][j]&gt;g[i]，则g[i]=f[j]+dis[i][j];d[i]=j;</p>
+<p>令i是x的儿子，则：<br>
+1.若c[x]≠i,则u[i]=max(u[x],f[x])+dis[i][x]<br>
+2.若c[x]=i,则u[i]=max(u[x],g[x])+dis[i][x]</p>
+<p>例四：树的最大独立集<br>
+一句话题意：对于一棵n个结点的树，选出最少的结点，使得所有的边至少有一个端点在选出的集合中</p>
+<p>解法<br>
+f[i][0]表示不取i结点的情况下，以i为根的子树中至少要选的节点数<br>
+f[i][1]表示取i结点的情况下，以i为根的子树中至少要选的结点数<br>
+<img src="https://gla-yolanda.github.io/post-images/1582979505057.gif" alt="" loading="lazy"><br>
+<img src="https://gla-yolanda.github.io/post-images/1582979461463.gif" alt="" loading="lazy"><br>
+答案是max(f[root][1],f[root][0]);</p>
 
             </div>
           </article>
@@ -105,9 +149,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://gla-yolanda.github.io/post/hello-gridea/">
+              <a href="https://gla-yolanda.github.io/post/test/">
                 <h3 class="post-title">
-                  Hello Gridea
+                  Test
                 </h3>
               </a>
             </div>
