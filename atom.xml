@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://gla-yolanda.github.io</id>
     <title>Gridea</title>
-    <updated>2020-03-01T09:19:02.077Z</updated>
+    <updated>2020-03-14T12:02:18.678Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://gla-yolanda.github.io"/>
     <link rel="self" href="https://gla-yolanda.github.io/atom.xml"/>
@@ -10,6 +10,103 @@
     <logo>https://gla-yolanda.github.io/images/avatar.png</logo>
     <icon>https://gla-yolanda.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[1D/1D动态优化]]></title>
+        <id>https://gla-yolanda.github.io/post/1d1d-dong-tai-you-hua/</id>
+        <link href="https://gla-yolanda.github.io/post/1d1d-dong-tai-you-hua/">
+        </link>
+        <updated>2020-03-14T10:10:54.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li>经典模型一</li>
+</ul>
+<p>-决策单调性——四边形不等式<br>
+<img src="https://gla-yolanda.github.io/post-images/1584185201960.png" alt="" loading="lazy"></p>
+<p>-设k(x)表示到状态x取到最优质的决策，那么：<br>
+<img src="https://gla-yolanda.github.io/post-images/1584182196714.png" alt="" loading="lazy"></p>
+<ul>
+<li>如何利用这个性质？</li>
+<li>沿着&quot;f(x)的最优决策是什么&quot;这个思路，换一个角度，对于一个已经计算出来的f(j)，“f(j)能更新的状态有哪些”</li>
+<li>一开始只有f(1)计算出来，所有状态的最优决策都是1<br>
+1111111111111111111111111111</li>
+<li>当f(2)计算出来后，有些决策换成了2，由于决策单调性，必然如下<br>
+1111112222222222222222222222</li>
+<li>当f(3)计算出来后，有些决策换成了3，由于决策单调性，必然如下<br>
+1111112222222233333333333333<br>
+1111333333333333333333333333</li>
+<li>绝不可能如下<br>
+1111113333333333333322222222</li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li>经典模型一</li>
+</ul>
+<p>-决策单调性——四边形不等式<br>
+<img src="https://gla-yolanda.github.io/post-images/1584185201960.png" alt="" loading="lazy"></p>
+<p>-设k(x)表示到状态x取到最优质的决策，那么：<br>
+<img src="https://gla-yolanda.github.io/post-images/1584182196714.png" alt="" loading="lazy"></p>
+<ul>
+<li>如何利用这个性质？</li>
+<li>沿着&quot;f(x)的最优决策是什么&quot;这个思路，换一个角度，对于一个已经计算出来的f(j)，“f(j)能更新的状态有哪些”</li>
+<li>一开始只有f(1)计算出来，所有状态的最优决策都是1<br>
+1111111111111111111111111111</li>
+<li>当f(2)计算出来后，有些决策换成了2，由于决策单调性，必然如下<br>
+1111112222222222222222222222</li>
+<li>当f(3)计算出来后，有些决策换成了3，由于决策单调性，必然如下<br>
+1111112222222233333333333333<br>
+1111333333333333333333333333</li>
+<li>绝不可能如下<br>
+1111113333333333333322222222</li>
+</ul>
+<!-- more -->
+<ul>
+<li>可以用“栈加二分”来确定决策</li>
+<li>栈中每个元素保存一个决策的起始位置和终止位置，显然这些位置相互连接并且依次递增。当插入一个决策的起始位置和终止位置，显然这些位置相互连接并且依次递增。当插入一个新决策时，从后到前扫描栈，对于一个老决策来说，要做这两件事情</li>
+</ul>
+<ol>
+<li>如果在老决策的起点处还是新决策好，则退栈，抛弃所有老决策，将其合并到新决策中，继续扫描下一个决策</li>
+<li>如果在老决策的起点处是老决策好，则转折点必然在这个老决策的区间里；二分查找之，然后新决策进栈，结束<br>
+由于一个决策出栈后再也不会进入，所以均摊时间为O(1)，但是由于二分查找的存在，所以整个算法的时间复杂度为O(nlogn)</li>
+</ol>
+<!-- more -->
+<ul>
+<li>例题【HNOI2008】玩具装箱     咕咕咕</li>
+</ul>
+<!-- more -->
+<!-- more -->
+<ul>
+<li>经典模型1-extra</li>
+<li>考虑一种特别的w函数： i≤j&lt;k,w[i,j]+w[j,k]=w[i,k],显然满足决策单调性。由于函数的特殊性，可以用更简洁的方法解决。</li>
+<li>由于w函数的特点，必然存在w'函数：i≤j,w[i,j]=w'[j]-w'[i]</li>
+<li>对于f(x)的决策k，有：f(x)=f(k)+w'[x]-w'[k]=g(k)+w'[x]-w'[1]   其中g(k)=f(k)-w[1,k]</li>
+<li>由于w'[x]-w'[1]是常数，所以有：f(x)=min g(k) +w[1,x]</li>
+<li>打擂台即可求出 min g(k)</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[状压DP]]></title>
+        <id>https://gla-yolanda.github.io/post/zhuang-ya-dp/</id>
+        <link href="https://gla-yolanda.github.io/post/zhuang-ya-dp/">
+        </link>
+        <updated>2020-03-07T10:10:30.000Z</updated>
+        <content type="html"><![CDATA[<p>状压DP特点</p>
+<ul>
+<li>数据某一位或某几位数据较小</li>
+<li>需要具备无后效性和最优子问题</li>
+</ul>
+<p>常见二进制操作</p>
+<ul>
+<li>求交集 i&amp;j</li>
+<li>求并集 i|j</li>
+<li>判断k在不在集合i中 if(i&amp;(i&lt;&lt;k))</li>
+<li>增加k i|=(1&lt;&lt;k)</li>
+<li>第k位取反 (原有就是去掉) i^=(1&lt;&lt;k)</li>
+<li>去掉集合i的最后一个1 i&amp;=(i-1) or i-=(-i)</li>
+<li>判断是否只有一个元素 if(i==i&amp;(-i))</li>
+<li>枚举子集 for(int i=0;s=1&lt;&lt;n;i&lt;s;++i)</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[树形DP]]></title>
         <id>https://gla-yolanda.github.io/post/shu-xing-dp/</id>
@@ -70,38 +167,6 @@ f[i][1]表示取i结点的情况下，以i为根的子树中至少要选的结�
         </link>
         <updated>2020-02-26T04:34:11.000Z</updated>
         <content type="html"><![CDATA[<p>我爱你！╰(￣ω￣ｏ)</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://gla-yolanda.github.io/post/hello-gridea/</id>
-        <link href="https://gla-yolanda.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>

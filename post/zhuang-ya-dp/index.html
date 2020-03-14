@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | Gridea</title>
+<title>状压DP | Gridea</title>
 <meta name="description" content="「献给许许多多的的祭日.」">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://gla-yolanda.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://gla-yolanda.github.io">Gridea</a></h3>
@@ -76,66 +83,62 @@
   </div>
 </nav>
 
-    
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>状压DP</h1>
+            <p class="article-meta">
+              2020-03-07
+              
+            </p>
+            
+            <div class="post-content">
+              <p>状压DP特点</p>
+<ul>
+<li>数据某一位或某几位数据较小</li>
+<li>需要具备无后效性和最优子问题</li>
+</ul>
+<p>常见二进制操作</p>
+<ul>
+<li>求交集 i&amp;j</li>
+<li>求并集 i|j</li>
+<li>判断k在不在集合i中 if(i&amp;(i&lt;&lt;k))</li>
+<li>增加k i|=(1&lt;&lt;k)</li>
+<li>第k位取反 (原有就是去掉) i^=(1&lt;&lt;k)</li>
+<li>去掉集合i的最后一个1 i&amp;=(i-1) or i-=(-i)</li>
+<li>判断是否只有一个元素 if(i==i&amp;(-i))</li>
+<li>枚举子集 for(int i=0;s=1&lt;&lt;n;i&lt;s;++i)</li>
+</ul>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://gla-yolanda.github.io/post/shu-xing-dp/">
+                <h3 class="post-title">
+                  树形DP
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
           
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
-            
-              <h3 class="year" data-aos-delay="500">2020</h3>
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/1d1d-dong-tai-you-hua/">
-                      <h4 class="post-title">
-                        1D/1D动态优化
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/zhuang-ya-dp/">
-                      <h4 class="post-title">
-                        状压DP
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/shu-xing-dp/">
-                      <h4 class="post-title">
-                        树形DP
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/test/">
-                      <h4 class="post-title">
-                        Test
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-            
-          </div>
-        </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://gla-yolanda.github.io/images/avatar.png?v=1584187335058" class="no-responsive avatar">
@@ -206,6 +209,8 @@
 </div>
 
 
+    </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">
@@ -215,6 +220,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

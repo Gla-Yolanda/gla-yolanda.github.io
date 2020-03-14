@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | Gridea</title>
+<title>1D/1D动态优化 | Gridea</title>
 <meta name="description" content="「献给许许多多的的祭日.」">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://gla-yolanda.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://gla-yolanda.github.io">Gridea</a></h3>
@@ -76,66 +83,90 @@
   </div>
 </nav>
 
-    
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>1D/1D动态优化</h1>
+            <p class="article-meta">
+              2020-03-14
+              
+            </p>
+            
+            <div class="post-content">
+              <ul>
+<li>经典模型一</li>
+</ul>
+<p>-决策单调性——四边形不等式<br>
+<img src="https://gla-yolanda.github.io/post-images/1584185201960.png" alt="" loading="lazy"></p>
+<p>-设k(x)表示到状态x取到最优质的决策，那么：<br>
+<img src="https://gla-yolanda.github.io/post-images/1584182196714.png" alt="" loading="lazy"></p>
+<ul>
+<li>如何利用这个性质？</li>
+<li>沿着&quot;f(x)的最优决策是什么&quot;这个思路，换一个角度，对于一个已经计算出来的f(j)，“f(j)能更新的状态有哪些”</li>
+<li>一开始只有f(1)计算出来，所有状态的最优决策都是1<br>
+1111111111111111111111111111</li>
+<li>当f(2)计算出来后，有些决策换成了2，由于决策单调性，必然如下<br>
+1111112222222222222222222222</li>
+<li>当f(3)计算出来后，有些决策换成了3，由于决策单调性，必然如下<br>
+1111112222222233333333333333<br>
+1111333333333333333333333333</li>
+<li>绝不可能如下<br>
+1111113333333333333322222222</li>
+</ul>
+<!-- more -->
+<ul>
+<li>可以用“栈加二分”来确定决策</li>
+<li>栈中每个元素保存一个决策的起始位置和终止位置，显然这些位置相互连接并且依次递增。当插入一个决策的起始位置和终止位置，显然这些位置相互连接并且依次递增。当插入一个新决策时，从后到前扫描栈，对于一个老决策来说，要做这两件事情</li>
+</ul>
+<ol>
+<li>如果在老决策的起点处还是新决策好，则退栈，抛弃所有老决策，将其合并到新决策中，继续扫描下一个决策</li>
+<li>如果在老决策的起点处是老决策好，则转折点必然在这个老决策的区间里；二分查找之，然后新决策进栈，结束<br>
+由于一个决策出栈后再也不会进入，所以均摊时间为O(1)，但是由于二分查找的存在，所以整个算法的时间复杂度为O(nlogn)</li>
+</ol>
+<!-- more -->
+<ul>
+<li>例题【HNOI2008】玩具装箱     咕咕咕</li>
+</ul>
+<!-- more -->
+<!-- more -->
+<ul>
+<li>经典模型1-extra</li>
+<li>考虑一种特别的w函数： i≤j&lt;k,w[i,j]+w[j,k]=w[i,k],显然满足决策单调性。由于函数的特殊性，可以用更简洁的方法解决。</li>
+<li>由于w函数的特点，必然存在w'函数：i≤j,w[i,j]=w'[j]-w'[i]</li>
+<li>对于f(x)的决策k，有：f(x)=f(k)+w'[x]-w'[k]=g(k)+w'[x]-w'[1]   其中g(k)=f(k)-w[1,k]</li>
+<li>由于w'[x]-w'[1]是常数，所以有：f(x)=min g(k) +w[1,x]</li>
+<li>打擂台即可求出 min g(k)</li>
+</ul>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://gla-yolanda.github.io/post/zhuang-ya-dp/">
+                <h3 class="post-title">
+                  状压DP
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
           
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
-            
-              <h3 class="year" data-aos-delay="500">2020</h3>
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/1d1d-dong-tai-you-hua/">
-                      <h4 class="post-title">
-                        1D/1D动态优化
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/zhuang-ya-dp/">
-                      <h4 class="post-title">
-                        状压DP
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/shu-xing-dp/">
-                      <h4 class="post-title">
-                        树形DP
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://gla-yolanda.github.io/post/test/">
-                      <h4 class="post-title">
-                        Test
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-            
-          </div>
-        </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://gla-yolanda.github.io/images/avatar.png?v=1584187335058" class="no-responsive avatar">
@@ -206,6 +237,8 @@
 </div>
 
 
+    </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">
@@ -215,6 +248,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
